@@ -33,7 +33,6 @@ class LeetCodeProcessor:
 
      def load(self,saved_data):
           print('start loading...')
-          self.saved_data=saved_data
           if os.path.exists(saved_data):
                f=open(saved_data)
                self.last_record=f.readline().strip()
@@ -67,12 +66,12 @@ class LeetCodeProcessor:
                     if i["status_display"]=="Accepted":
                          last_slash=i['url'].rfind('/',0,len(i['url'])-1)
                          if _DEBUG:
-                              print('submission id: '+i['url'][last_slash+1:-1])
+                              print('submission id: '+i['url'][last_slash+1:-1],'target: '+self.last_record)
                          if i['url'][last_slash+1:-1]==self.last_record:
                               data['has_next']=False
                               break
                          elif self.to_save==None:
-                              self.to_save=i['url'][last_slash:-1]
+                              self.to_save=i['url'][last_slash+1:-1]
                          try:
                               self.downloadCode(self.host+i['url'],i['title'],suffix[i['lang']] if i['lang'] in suffix else i['lang'])
                          except Exception as e:
@@ -85,7 +84,7 @@ class LeetCodeProcessor:
                else:
                     offset+=process_once
           print('finish processing!')
-          print('stat: succeeded {} files, failed {} files, skipped {} files'.format(self.succeed_count,len(failed),self.succeed))
+          print('stat: succeeded {} files, failed {} files, skipped {} files'.format(self.succeed_count,len(self.failed),self.skipped_count))
 
      def downloadCode(self,codeadd,title,format):
           if (title,format) in self.succeed:
@@ -138,10 +137,13 @@ class LeetCodeProcessor:
                     else:
                          break
      def save(self):
-          if self.hasattr('saved_data'):
+          if hasattr(self,'saved_data') and self.to_save:
                f=open(self.saved_data,'w')
                f.write(self.to_save)
                f.close()
+                                   
+
+
                                    
 
 if __name__=="__main__":
