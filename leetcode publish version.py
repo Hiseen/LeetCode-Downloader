@@ -68,7 +68,7 @@ class LeetCodeProcessor:
                          last_slash=i['url'].rfind('/',0,len(i['url'])-1)
                          if _DEBUG:
                               print('submission id: '+i['url'][last_slash+1:-1])
-                         if i['url'][last_slash:-1]==self.last_record:
+                         if i['url'][last_slash+1:-1]==self.last_record:
                               data['has_next']=False
                               break
                          elif self.to_save==None:
