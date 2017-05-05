@@ -28,6 +28,8 @@ class LeetCodeProcessor:
           }
 
      def load(self,saved_data):
+          if saved_data==None:
+               return
           print('start loading...')
           if os.path.exists(saved_data):
                f=open(saved_data)
