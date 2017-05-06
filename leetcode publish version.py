@@ -145,8 +145,11 @@ class LeetCodeProcessor:
                                    
 
 if __name__=="__main__":
-     obj=LeetCodeProcessor('Your own directory to save the codes')
-     obj.load('Your own file to save the progress to prevent re-download (can be None)')
+     obj=LeetCodeProcessor('Your own directory to save the code')
+     #if you specify the argument for "load" (e,g obj.load("data.txt"))
+     #your latest submission id will be saved in the file("data.txt")
+     #next time when you run the module, it will stopped when reaching the saved submission id to prevent from re-scanning for previous submissions.
+     obj.load('Your own file to save the progress to prevent from re-scanning (can be None)')
      obj.login("Your own leetcode username","Your own password")
      obj.request()
      obj.retry()
