@@ -8,7 +8,7 @@ from typecheck import *
 
 _DEBUG=False
 
-suffix={'python':'py','csharp':'cs','javascript':'js','ruby':'rb'}
+suffix={'python':'py','python3':'py','csharp':'cs','javascript':'js','ruby':'rb'}
 
 class LeetCodeProcessor:
      def __init__(self,dir_for_download=None):
