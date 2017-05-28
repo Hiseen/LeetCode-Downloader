@@ -38,6 +38,7 @@ class LeetCodeProcessor:
                print('load complete!')
           else:
                print('Your data will be saved at {}'.format(saved_data))
+          self.saved_data=saved_data
           
      def login(self,username=None,password=None):
           print('start logining...')
@@ -135,10 +136,14 @@ class LeetCodeProcessor:
                     else:
                          break
      def save(self):
+          print("start saving...")
           if hasattr(self,'saved_data') and self.to_save:
                f=open(self.saved_data,'w')
                f.write(self.to_save)
                f.close()
+               print("saving complete!")
+          else:
+               print("stop saving.")
                                    
 
 
