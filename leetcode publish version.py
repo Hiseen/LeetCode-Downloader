@@ -44,8 +44,9 @@ class LeetCodeProcessor:
           print('start logining...')
           cookie = http.cookiejar.CookieJar()
           handler = urllib.request.HTTPCookieProcessor(cookie)
+          request = urllib.request.Request(self.host,headers=self.headers)
           self.urlOpener = urllib.request.build_opener(handler)
-          self.urlOpener.open(self.host)
+          self.urlOpener.open(request)
           csrftoken = ""
           for ck in cookie:
               csrftoken = ck.value
