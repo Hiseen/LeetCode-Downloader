@@ -104,7 +104,7 @@ class LeetCodeProcessor:
           start = all.find('submissionCode: ',formatend)
           finis = all.find(r",\n",start)
           code = all[start+18:finis-2]
-          toCode = {r'\\u000D':'\r',r'\\u000A':'\n',r'\\u003B':';',r'\\u003C':'<',r'\\u003E':'>',r'\\u003D':'=',
+          toCode = {r'\\u000D':' ',r'\\u000A':'\n',r'\\u003B':';',r'\\u003C':'<',r'\\u003E':'>',r'\\u003D':'=',
           r'\\u0026':'&',r'\\u002D':'-',r'\\u0022':'"',r'\\u0009':'\t',r'\\u0027':"'",r'\\u005C':'\\'}
           for key in toCode.keys():
               code = code.replace(key,toCode[key])
