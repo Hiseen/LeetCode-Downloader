@@ -33,11 +33,12 @@ class LeetCodeProcessor:
           print('start loading...')
           if os.path.exists(saved_data):
                f=open(saved_data)
-               self.last_record=f.readline().strip()
+               self.last_record=int(f.readline().strip())
                f.close()
                print('load complete!')
           else:
                print('Your data will be saved at {}'.format(saved_data))
+               self.last_record=0
           self.saved_data=saved_data
           
      def login(self,username=None,password=None):
@@ -67,7 +68,7 @@ class LeetCodeProcessor:
                          last_slash=i['url'].rfind('/',0,len(i['url'])-1)
                          if _DEBUG:
                               print('submission id: '+i['url'][last_slash+1:-1],'target: '+self.last_record)
-                         if i['url'][last_slash+1:-1]==self.last_record:
+                         if int(i['url'][last_slash+1:-1])==self.last_record:
                               data['has_next']=False
                               break
                          elif self.to_save==None:
@@ -103,10 +104,10 @@ class LeetCodeProcessor:
           start = all.find('submissionCode: ',formatend)
           finis = all.find(r",\n",start)
           code = all[start+18:finis-2]
-          toCpp = {r'\\u000D':'\n',r'\\u000A':' ',r'\\u003B':';',r'\\u003C':'<',r'\\u003E':'>',r'\\u003D':'=',
+          toCode = {r'\\u000D':'\r',r'\\u000A':'\n',r'\\u003B':';',r'\\u003C':'<',r'\\u003E':'>',r'\\u003D':'=',
           r'\\u0026':'&',r'\\u002D':'-',r'\\u0022':'"',r'\\u0009':'\t',r'\\u0027':"'",r'\\u005C':'\\'}
-          for key in toCpp.keys():
-              code = code.replace(key,toCpp[key])
+          for key in toCode.keys():
+              code = code.replace(key,toCode[key])
           self.saveCode(code,title,format)
 
      def saveCode(self,code,title,format):
